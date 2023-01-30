@@ -21,9 +21,9 @@ class Game {
     gameOverScreen.style.display = "flex";
   };
   comidaAparece = () => {
-    let randomPosX = Math.random() * canvas.width;
+    let randomPosX = Math.random() * (canvas.width - 45);
 
-    if (this.frame % 120 === 0) {
+    if (this.frame % 140 === 0) {
       let food1 = new comida(randomPosX, true);
       this.comidaArr.push(food1);
     }
@@ -34,7 +34,7 @@ class Game {
     }
   };
   toxicoAparece = () => {
-    let randomPosX = Math.random() * canvas.width;
+    let randomPosX = Math.random() * (canvas.width -45);
 
     if (this.frame % 930 === 0) {
       let tox1 = new toxico(randomPosX);
@@ -42,7 +42,7 @@ class Game {
     }
   };
   pocimaAparece = () => {
-    let randomPosX = Math.random() * canvas.width;
+    let randomPosX = Math.random() * (canvas.width-45);
 
     if (this.frame % 240 === 0) {
       let poc1 = new pocima(randomPosX);
@@ -58,9 +58,10 @@ class Game {
         eachComida.h + eachComida.y > this.person.y
       ) {
         this.contador += this.comida.valor
-        this.comidaArr.shift(eachComida);
+        this.comidaArr.splice(eachComida,1);
         count.innerText = this.contador
-        console.log(this.contador)
+        console.log(eachComida)
+       
       }else{
         
       }
@@ -90,18 +91,12 @@ class Game {
       ) {
         this.contador +=  this.pocima.valor 
         this.pocimaArr.shift(eachPocima)
-        count.innerText++
+        count.innerText = this.contador
+        
       }
     });
   }
-  // ESTO YA LO HACE COLISION FRUTA
-  // colisionElementSuelo =()=>{
-  //   if(this.comida.y === canvas.height){
-  //     this.comidaArr.shift()
-  //   }else if(this.pocima.y === canvas.height){
-  //     this.pocimaArr.shift()
-  // }
-  // }
+ 
   drawBackground = () => {
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
   };
