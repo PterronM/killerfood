@@ -2,12 +2,17 @@ class person {
   constructor() {
     this.x = 200;
     this.y = canvas.height - 160;
-    this.w = 100;
+    this.w = 90;
     this.h = 160;
     this.speed = 50;
     this.image = new Image();
     this.image.src = "../img/personaje.png";
-  }
+    // if(personD === true){
+    //         this.image.src = "../img/personaje-rotado.png"
+    // }else if(personD === false){
+    //         this.image.src = "../img/personaje.png"
+    //     }
+    }
 
   // METODOS
   drawPerson = () => {

@@ -15,19 +15,29 @@ class Game {
   }
 
   subirNivel = () => {
-    if (this.contador > 100 && this.contador < 300) {
+    if (this.contador > 100 && this.contador < 299) {
       this.toxicoArr.forEach((eachTox) => {
         eachTox.aumentarSpeed(0.3);
       });
-    }else if (this.contador >= 300 && this.contador < 500){
-      this.aparicionTox.forEach((eachTox)=>{
+    }else if (this.contador >= 300 && this.contador < 499){
+      this.toxicoArr.forEach((eachTox)=>{
         eachTox.aumentarSpeed(0.5);
+      });
+    }else if (this.contador >= 500 && this.contador < 799){
+      this.toxicoArr.forEach((eachTox)=>{
+        eachTox.aumentarSpeed(0.9);
+      });
+    }else if(this.contador >= 800 && this.contador < 1099){
+      this.toxicoArr.forEach((eachTox)=>{
+        eachTox.aumentarSpeed(1.2)
       })
     }
+
   };
   gameOver = () => {
     this.isGameOn = false;
     canvas.style.display = "none";
+    // imgJoker.style.display ="none";
     startScreenGame.style.display = "none";
     gameOverScreen.style.display = "flex";
   };
@@ -94,7 +104,10 @@ class Game {
         eachTox.y < this.person.y + this.person.h &&
         eachTox.h + eachTox.y > this.person.y
       ) {
-        this.gameOver();
+        this.isGameOn = false;
+        setTimeout(()=>{
+          this.gameOver()
+        },1000)
       }
     });
   };

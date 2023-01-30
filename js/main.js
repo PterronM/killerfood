@@ -7,12 +7,13 @@ const pauseBtnDOM = document.querySelector("#img-pause");
 const count = document.querySelector("#puntuacion span");
 const btnReset = document.querySelector("#restart-btn");
 const gameOverScreen = document.querySelector("#gameover-screen");
+// const imgJoker = document.querySelector("#joker");
 let game;
 
 const startGame = () => {
   // 1.cambiar a canvas del juego
   startScreenDom.style.display = "none";
-  canvas.style.display = "block";
+  canvas.style.display = "flex";
   startScreenGame.style.display = "flex";
 
   // 2.crear un objeto de la clase game (crear el juego)
@@ -31,6 +32,7 @@ const resetGame = () => {
 const movePerson = (event) => {
   if (event.code === "ArrowLeft") {
     game.person.moveLeft();
+
   } else if (event.code === "ArrowRight") {
     game.person.moveRight();
   }
