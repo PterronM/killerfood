@@ -6,7 +6,7 @@ class toxico {
     this.h = 70;
     this.speed = 2;
     this.image = new Image();
-    this.image.src = "../img/muerte.png"
+    this.image.src = "../img/muerte.png";
   }
 
   // metodos
@@ -18,17 +18,8 @@ class toxico {
     this.y += this.speed;
   };
 
-  
+  aumentarSpeed = (tiempo)=>{
+    this.speed+= tiempo
   }
 
-  // metodos
-  drawToxico = () => {
-    ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
-  };
-
-  moveToxico = () => {
-    this.y += this.speed;
-  };
-
-  
-
+}

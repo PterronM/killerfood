@@ -4,7 +4,6 @@ class Game {
     this.background.src = "img/background2.jpg";
     this.isGameOn = true;
     this.person = new person();
-    this.comida = new comida();
     this.toxico = new toxico();
     this.pocima = new pocima();
     this.comidaArr = [];
@@ -12,8 +11,20 @@ class Game {
     this.pocimaArr = [];
     this.frame = 1; //propiedad que determina la cantidad de comida que han pasado por el juego
     this.contador = 0;
+    this.aparicionTox = 240;
   }
 
+  subirNivel = () => {
+    if (this.contador > 100 && this.contador < 300) {
+      this.toxicoArr.forEach((eachTox) => {
+        eachTox.aumentarSpeed(0.3);
+      });
+    }else if (this.contador >= 300 && this.contador < 500){
+      this.aparicionTox.forEach((eachTox)=>{
+        eachTox.aumentarSpeed(0.5);
+      })
+    }
+  };
   gameOver = () => {
     this.isGameOn = false;
     canvas.style.display = "none";
@@ -21,32 +32,43 @@ class Game {
     gameOverScreen.style.display = "flex";
   };
   comidaAparece = () => {
-    let randomPosX = Math.random() * (canvas.width - 45);
+    let randomPosXPlatano = Math.random() * (canvas.width - 45);
+    // let randomPosXManzana = Math.random() * (canvas.width - 45);
 
-    if (this.frame % 140 === 0) {
-      let food1 = new comida(randomPosX, true);
+    if (this.frame % 120 === 0) {
+      let food1 = new comida(randomPosXPlatano);
       this.comidaArr.push(food1);
     }
 
-    if (this.frame % 140 === 0) {
-      let food2 = new comida(randomPosX, false);
-      this.comidaArr.push(food2);
+    // if (this.frame % 160 === 0) {
+    //   let food2 = new comida(randomPosXManzana, false);
+    //   this.comidaArr.push(food2);
+    // }
+  };
+  quitarFruta = () => {
+    if (this.comidaArr.length !== 0 && this.comidaArr[0].y > canvas.height) {
+      this.comidaArr.shift();
     }
   };
   toxicoAparece = () => {
-    let randomPosX = Math.random() * (canvas.width -45);
+    let randomPosX = Math.random() * (canvas.width - 45);
 
-    if (this.frame % 930 === 0) {
+    if (this.frame % this.aparicionTox === 0) {
       let tox1 = new toxico(randomPosX);
       this.toxicoArr.push(tox1);
     }
   };
   pocimaAparece = () => {
-    let randomPosX = Math.random() * (canvas.width-45);
+    let randomPosX = Math.random() * (canvas.width - 45);
 
     if (this.frame % 240 === 0) {
       let poc1 = new pocima(randomPosX);
       this.pocimaArr.push(poc1);
+    }
+  };
+  quitarPocima = () => {
+    if (this.pocimaArr.length !== 0 && this.pocimaArr[0].y > canvas.height) {
+      this.pocimaArr.shift();
     }
   };
   colissionFrutaPerson = () => {
@@ -57,46 +79,40 @@ class Game {
         eachComida.y < this.person.y + this.person.h &&
         eachComida.h + eachComida.y > this.person.y
       ) {
-        this.contador += this.comida.valor
-        this.comidaArr.splice(eachComida,1);
-        count.innerText = this.contador
-        console.log(eachComida)
-       
-      }else{
-        
+        this.contador += eachComida.valor;
+        this.comidaArr.splice(eachComida, 1);
+        count.innerText = this.contador;
       }
     });
   };
   colissionToxicoPerson = () => {
     this.toxicoArr.forEach((eachTox) => {
-      // console.log(eachTox)
+
       if (
-        eachTox.x <= this.person.x + this.person.w &&
-        eachTox.x + eachTox.w >= this.person.x &&
-        eachTox.y <= this.person.y + this.person.h &&
-        eachTox.h + eachTox.y >= this.person.y
+        eachTox.x < this.person.x + this.person.w &&
+        eachTox.x + eachTox.w > this.person.x &&
+        eachTox.y < this.person.y + this.person.h &&
+        eachTox.h + eachTox.y > this.person.y
       ) {
         this.gameOver();
       }
     });
   };
-  colisionPocimaPerson = ()=>{
+  colisionPocimaPerson = () => {
     this.pocimaArr.forEach((eachPocima) => {
       // console.log(eachTox)
       if (
-        eachPocima.x <= this.person.x + this.person.w &&
-        eachPocima.x + eachPocima.w >= this.person.x &&
-        eachPocima.y <= this.person.y + this.person.h &&
-        eachPocima.h + eachPocima.y >= this.person.y
+        eachPocima.x < this.person.x + this.person.w &&
+        eachPocima.x + eachPocima.w > this.person.x &&
+        eachPocima.y < this.person.y + this.person.h &&
+        eachPocima.h + eachPocima.y > this.person.y
       ) {
-        this.contador +=  this.pocima.valor 
-        this.pocimaArr.shift(eachPocima)
-        count.innerText = this.contador
-        
+        this.contador += eachPocima.valor;
+        this.pocimaArr.splice(eachPocima, 1);
+        count.innerText = this.contador;
       }
     });
-  }
- 
+  };
   drawBackground = () => {
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
   };
@@ -125,10 +141,10 @@ class Game {
       eachTox.moveToxico();
     });
     this.pocimaAparece();
-    this.pocimaArr.forEach((eachPocima)=>{
+    this.pocimaArr.forEach((eachPocima) => {
       eachPocima.movePocina();
-    })
-    
+    });
+    this.subirNivel();
 
     // 3.dibujar los elementos
     this.drawBackground();
@@ -142,6 +158,8 @@ class Game {
       eachPocima.drawPocima();
     });
     this.person.drawPerson();
+    this.quitarFruta();
+    this.quitarPocima();
 
     // 4. recursion y control
     if (this.isGameOn === true) {

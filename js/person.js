@@ -4,7 +4,7 @@ class person {
     this.y = canvas.height - 160;
     this.w = 100;
     this.h = 160;
-    this.speed = 40;
+    this.speed = 50;
     this.image = new Image();
     this.image.src = "../img/personaje.png";
   }
