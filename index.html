@@ -13,6 +13,8 @@
     <!-- PANTALLA PRINCIPAL -->
     <div id="start-screen" class="container-principal">
         <img src="/img/killerFood.png" alt="Killer Food" width="800">
+        <input id="name-input" type="text" placeholder="Tu Nombre" />
+        <button id="btn-add">Añadir</button>
         <button id="start-game">Comenzar</button>
     </div>
     
@@ -29,6 +31,9 @@
     
     <!-- GAME OVER -->
     <div id="gameover-screen">
+        <div class="update-container">
+            <ul id="namePlayer-list"></ul>
+        </div>
         <img src="/img/game-over.png" alt="Game Over">
         <button id="restart-btn">Intentelo de nuevo Amigo</button>
     </div>

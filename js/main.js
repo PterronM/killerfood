@@ -4,17 +4,35 @@ const startBtnDom = document.querySelector("#start-game");
 const startScreenDom = document.querySelector("#start-screen");
 const startScreenGame = document.querySelector("#container-game");
 const pauseBtnDOM = document.querySelector("#img-pause");
-const count = document.querySelector("#puntuacion span");
+let count = document.querySelector("#puntuacion span");
 const btnReset = document.querySelector("#restart-btn");
 const gameOverScreen = document.querySelector("#gameover-screen");
+const addName = document.querySelector("#name-input");
+const ulListNamePlayer = document.querySelector("#namePlayer-list")
+const btnAddName = document.querySelector("#btn-add")
+let playerName =" ";
 // const imgJoker = document.querySelector("#joker");
 let game;
 
+
+const addNamePlayer = () => {
+  playerName = addName.value;
+  //crear un nuevo elemento en la lista
+  let newNameList = document.createElement("li");
+  //crear el innerText del nuevo elemento li
+  // newNameList.innerText = "Welcome " + playerName + "! Are you ready??";
+  //agregar el elemento li a la ul que ya tenemos
+  ulListNamePlayer.appendChild(newNameList);
+  //limpiar el input
+  addName.value = " ";
+};
 const startGame = () => {
   // 1.cambiar a canvas del juego
+
   startScreenDom.style.display = "none";
   canvas.style.display = "flex";
   startScreenGame.style.display = "flex";
+  
 
   // 2.crear un objeto de la clase game (crear el juego)
   game = new Game();
@@ -27,7 +45,7 @@ const resetGame = () => {
   startScreenDom.style.display = "flex";
   startScreenGame.style.display = "none";
   gameOverScreen.style.display = "none";
-  count.innerText = 0
+  count.innerText = 0;
 };
 const movePerson = (event) => {
   if (event.code === "ArrowLeft") {
@@ -50,3 +68,4 @@ pauseBtnDOM.addEventListener("click",()=>{
     game.gameLoop()
   }
 })
+btnAddName.addEventListener("click",addNamePlayer)

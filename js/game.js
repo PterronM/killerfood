@@ -12,8 +12,27 @@ class Game {
     this.frame = 1; //propiedad que determina la cantidad de comida que han pasado por el juego
     this.contador = 0;
     this.aparicionTox = 240;
+    
   }
 
+  updateNameScore = () => {
+    // count = this.contador.innerText;
+    let newNameList = document.createElement("li");
+
+    if (this.contador <= 200) {
+      newNameList.innerText = playerName + " has obtenido " +  this.contador +  " puntos. Demasiado lento";
+    } else if (this.contador <= 500) {
+      newNameList.innerText = "Bueno..." +  playerName + " vas mejorando, " + this.contador + "puntos";
+      
+    } else if (this.contador <= 800) {
+      newNameList.innerText = "WOW " + playerName + " genial,  " + this.contador + "puntos";
+    
+    } else {
+      newNameList.innerText =  this.contador + " puntos " + playerName + " eres un maquina ";
+    }
+
+    ulListNamePlayer.appendChild(newNameList);
+  };
   subirNivel = () => {
     if (this.contador > 100 && this.contador < 299) {
       this.toxicoArr.forEach((eachTox) => {
@@ -40,6 +59,7 @@ class Game {
     // imgJoker.style.display ="none";
     startScreenGame.style.display = "none";
     gameOverScreen.style.display = "flex";
+   this.updateNameScore();
   };
   comidaAparece = () => {
     let randomPosXPlatano = Math.random() * (canvas.width - 45);
@@ -173,6 +193,7 @@ class Game {
     this.person.drawPerson();
     this.quitarFruta();
     this.quitarPocima();
+    
 
     // 4. recursion y control
     if (this.isGameOn === true) {
