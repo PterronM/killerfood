@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Killer</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    
+<div id="container-principal">
+    <!-- PANTALLA PRINCIPAL -->
+    <div id="start-screen" class="container-principal">
+        <img src="/img/killerFood.png" alt="Killer Food" width="800">
+        <button id="start-game">Comenzar</button>
+    </div>
+    
+    <!-- START GAME -->
+    <div id="container-game">
+        <p id="puntuacion">Puntuacion : <span>0</span></p>
+        <img id="img-pause" src="/img/btn-pausa.png" alt="Pausa" width="40">
+    </div>
+    <div id="container-canvas">
+        <canvas id="my-canvas" width="500" height="700"></canvas>
+    </div>
+       
+    
+    
+    <!-- GAME OVER -->
+    <div id="gameover-screen">
+        <img src="/img/game-over.png" alt="Game Over">
+        <button id="restart-btn">Intentelo de nuevo Amigo</button>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/game.js"></script>
+    <script src="/js/comida.js"></script>
+    <script src="/js/toxico.js"></script>
+    <script src="/js/person.js"></script>
+    <script src="/js/pocima.js"></script>
+
+</div>
+
+
+
+</body>
+</html>
