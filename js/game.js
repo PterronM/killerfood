@@ -2,17 +2,22 @@ class Game {
   constructor() {
     this.background = new Image(); //agregamos imagen de fondo
     this.background.src = "img/background2.jpg";
+    
     this.isGameOn = true;
     this.person = new person();
     this.toxico = new toxico();
     this.pocima = new pocima();
+    this.nextL = new nextLevel();
+
     this.comidaArr = [];
     this.toxicoArr = [];
     this.pocimaArr = [];
-    this.frame = 1; //propiedad que determina la cantidad de comida que han pasado por el juego
+    this.frame = 1; //propiedad que determina la cantidad de comida que ha pasado por el juego
     this.contador = 0;
     this.aparicionTox = 240;
-    
+    this.countNivel = 0;
+    this.scoreCheck = 100; //controla que los niveles empiecen a subir cuando pase de 50 puntos
+    this.speedToxInic = 2; //valor inicial de la velocidad de los toxicos
   }
 
   updateNameScore = () => {
@@ -20,38 +25,38 @@ class Game {
     let newNameList = document.createElement("li");
 
     if (this.contador <= 200) {
-      newNameList.innerText = playerName + " has obtenido " +  this.contador +  " puntos. Demasiado lento";
+      newNameList.innerText =
+        // playerName +
+        " Has obtenido " +
+        this.contador +
+        " puntos. Demasiado lento";
     } else if (this.contador <= 500) {
-      newNameList.innerText = "Bueno..." +  playerName + " vas mejorando, " + this.contador + "puntos";
-      
+      newNameList.innerText =
+        "Bueno...vas mejorando, " + this.contador + " puntos";
     } else if (this.contador <= 800) {
-      newNameList.innerText = "WOW " + playerName + " genial,  " + this.contador + "puntos";
-    
+      newNameList.innerText =
+        "WOW  genial,  " + this.contador + " puntos";
     } else {
-      newNameList.innerText =  this.contador + " puntos " + playerName + " eres un maquina ";
+      newNameList.innerText =
+        this.contador + " puntos , eres un maquina ";
     }
 
     ulListNamePlayer.appendChild(newNameList);
   };
   subirNivel = () => {
-    if (this.contador > 100 && this.contador < 299) {
-      this.toxicoArr.forEach((eachTox) => {
-        eachTox.aumentarSpeed(0.3);
-      });
-    }else if (this.contador >= 300 && this.contador < 499){
-      this.toxicoArr.forEach((eachTox)=>{
-        eachTox.aumentarSpeed(0.5);
-      });
-    }else if (this.contador >= 500 && this.contador < 799){
-      this.toxicoArr.forEach((eachTox)=>{
-        eachTox.aumentarSpeed(0.9);
-      });
-    }else if(this.contador >= 800 && this.contador < 1099){
-      this.toxicoArr.forEach((eachTox)=>{
-        eachTox.aumentarSpeed(1.2)
+    if (this.contador >= this.scoreCheck) {
+      this.scoreCheck += 100 // 1
+      this.nextL.x = 20;
+      setTimeout(()=>{
+        this.nextL.x = -500;
+        this.aparicionTox -= 30;
+        this.speedToxInic += 0.3;
+        this.toxicoArr.forEach((eachTox)=>{
+          eachTox.aumentarSpeed(0.3); //velocidad inicial en 2 + 0.3 de speedToxInic = 2.03 si le paso speedTocIni seria un total de 4,06
       })
-    }
 
+      },800);
+    }
   };
   gameOver = () => {
     this.isGameOn = false;
@@ -59,21 +64,21 @@ class Game {
     // imgJoker.style.display ="none";
     startScreenGame.style.display = "none";
     gameOverScreen.style.display = "flex";
-   this.updateNameScore();
+    this.updateNameScore();
   };
   comidaAparece = () => {
-    let randomPosXPlatano = Math.random() * (canvas.width - 45);
-    // let randomPosXManzana = Math.random() * (canvas.width - 45);
+    let randomPosXPlatano = Math.floor(Math.random() * (canvas.width - 45));
+    let randomPosXManzana = Math.random() * (canvas.width - 45);
 
     if (this.frame % 120 === 0) {
-      let food1 = new comida(randomPosXPlatano);
+      let food1 = new comida(randomPosXPlatano, true);
       this.comidaArr.push(food1);
     }
 
-    // if (this.frame % 160 === 0) {
-    //   let food2 = new comida(randomPosXManzana, false);
-    //   this.comidaArr.push(food2);
-    // }
+    if (this.frame % 160 === 0) {
+      let food2 = new comida(randomPosXManzana, false);
+      this.comidaArr.push(food2);
+    }
   };
   quitarFruta = () => {
     if (this.comidaArr.length !== 0 && this.comidaArr[0].y > canvas.height) {
@@ -81,15 +86,20 @@ class Game {
     }
   };
   toxicoAparece = () => {
-    let randomPosX = Math.random() * (canvas.width - 45);
+    let randomPosX = Math.floor(Math.random() * (canvas.width - 45));
 
     if (this.frame % this.aparicionTox === 0) {
-      let tox1 = new toxico(randomPosX);
+      let tox1 = new toxico(randomPosX,this.speedToxInic);//le paso el valor de la velocidad de 2
       this.toxicoArr.push(tox1);
     }
   };
+  quitarToxico = () => {
+    if (this.toxicoArr.length !== 0 && this.toxicoArr[0].y > canvas.height) {
+      this.toxicoArr.shift();
+    }
+  };
   pocimaAparece = () => {
-    let randomPosX = Math.random() * (canvas.width - 45);
+    let randomPosX = Math.floor(Math.random() * (canvas.width - 45));
 
     if (this.frame % 240 === 0) {
       let poc1 = new pocima(randomPosX);
@@ -102,7 +112,7 @@ class Game {
     }
   };
   colissionFrutaPerson = () => {
-    this.comidaArr.forEach((eachComida) => {
+    this.comidaArr.forEach((eachComida, index) => {
       if (
         eachComida.x < this.person.x + this.person.w &&
         eachComida.x + eachComida.w > this.person.x &&
@@ -110,14 +120,13 @@ class Game {
         eachComida.h + eachComida.y > this.person.y
       ) {
         this.contador += eachComida.valor;
-        this.comidaArr.splice(eachComida, 1);
+        this.comidaArr.splice(index, 1);
         count.innerText = this.contador;
       }
     });
   };
   colissionToxicoPerson = () => {
     this.toxicoArr.forEach((eachTox) => {
-
       if (
         eachTox.x < this.person.x + this.person.w &&
         eachTox.x + eachTox.w > this.person.x &&
@@ -125,9 +134,9 @@ class Game {
         eachTox.h + eachTox.y > this.person.y
       ) {
         this.isGameOn = false;
-        setTimeout(()=>{
-          this.gameOver()
-        },1000)
+        setTimeout(() => {
+          this.gameOver();
+        }, 1000);
       }
     });
   };
@@ -149,6 +158,7 @@ class Game {
   drawBackground = () => {
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
   };
+  
   clearCanvas = () => {
     ctx.clearRect(0, 0, canvas.Width, canvas.height);
   };
@@ -158,6 +168,7 @@ class Game {
 
     // 1.limpiar canvas
     this.clearCanvas();
+    // ctx.clearRect(0,0,canvas.width,canvas.height)
 
     // 2.movimientos y acciones de los elementos
     this.colissionToxicoPerson();
@@ -190,9 +201,11 @@ class Game {
     this.pocimaArr.forEach((eachPocima) => {
       eachPocima.drawPocima();
     });
-    this.person.drawPerson();
+    this.person.drawPerson(this.frame);
     this.quitarFruta();
     this.quitarPocima();
+    this.quitarToxico();
+    this.nextL.drawNextLevel();
     
 
     // 4. recursion y control

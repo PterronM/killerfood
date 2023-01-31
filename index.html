@@ -13,19 +13,25 @@
     <!-- PANTALLA PRINCIPAL -->
     <div id="start-screen" class="container-principal">
         <img src="/img/killerFood.png" alt="Killer Food" width="800">
-        <input id="name-input" type="text" placeholder="Tu Nombre" />
-        <button id="btn-add">Añadir</button>
+        <!-- <div id="add-name">
+            <input id="name-input" type="text" placeholder="Tu Nombre" />
+            <button id="btn-add">Añadir</button>
+        </div> -->
         <button id="start-game">Comenzar</button>
     </div>
     
     <!-- START GAME -->
-    <div id="container-game">
-        <p id="puntuacion">Puntuacion : <span>0</span></p>
-        <img id="img-pause" src="/img/btn-pausa.png" alt="Pausa" width="40">
-    </div>
+    
     <div id="container-canvas">
         <!-- <img id="joker" src="./img/joker.png" alt="Joker"> -->
-        <canvas id="my-canvas" width="500" height="700"></canvas>
+        <div >
+            <canvas id="my-canvas" width="500" height="700"></canvas>
+        </div>
+        
+        <div id="container-game">
+            <p id="puntuacion">Puntuacion : <span>&nbsp 0 </span></p>
+            <img id="img-pause" src="/img/btn-pausa.png" alt="Pausa" width="40">
+        </div>
     </div>
        
     
@@ -35,7 +41,7 @@
             <ul id="namePlayer-list"></ul>
         </div>
         <img src="/img/game-over.png" alt="Game Over">
-        <button id="restart-btn">Intentelo de nuevo Amigo</button>
+        <button id="restart-btn">Intentalo de nuevo Amigo</button>
     </div>
 
     <script src="/js/main.js"></script>
@@ -44,6 +50,7 @@
     <script src="/js/toxico.js"></script>
     <script src="/js/person.js"></script>
     <script src="/js/pocima.js"></script>
+    <script src="/js/nextLevel.js"></script>
 
 </div>
 

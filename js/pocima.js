@@ -1,11 +1,11 @@
 class pocima {
     constructor(posX) {
       this.x = posX;
-      this.y = 0;
+      this.y = -10;
       this.w = 50;
       this.h = 70;
       this.valor = 20;
-      this.speed = 2;
+      this.speed = 3;
       this.image = new Image();
       this.image.src ="../img/X2.png"
     }

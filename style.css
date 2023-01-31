@@ -11,7 +11,9 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100%;
     background-color:#B944B1;
+    
 }
 
 #start-screen{
@@ -19,6 +21,7 @@ body{
     flex-direction:column;
     justify-content: center;
     align-items: center;
+    gap: 20px;
     
 }
 
@@ -34,18 +37,44 @@ body{
     width: 50%;
   }
 
+  #add-name{
+    display: flex;
+    gap: 20px
+  }
+
+  #add-name input{
+    height: 30px;
+    background-color:#44b94c;
+    color: #ffffff;
+    font-weight: bolder;
+    font-size:1em ;
+  }
+
+  #btn-add{
+    background-color: black;
+    color: #B944B1;
+    border: solid #44b94c;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100px;
+    padding: 7px;
+    font-weight: 700;
+  }
+
   #container-game{
     display: none;
     flex-direction:row ;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    width:100vh;
-    height: 40px;
-   
-  }
+    position: absolute;
+    width: 480px;
+    height:50px; 
+    padding: 10px;
+    }
 
   #container-canvas{
     display: flex;
+    flex-direction: column;
     box-shadow: 5px 5px 50px 1px #b6b8b3ef ;
     margin-top: 14px;
   }
@@ -75,6 +104,8 @@ body{
   width: 50%;
 }
 #puntuacion{
+  display: flex;
+  justify-items: flex-start;
   color:#9eff07 ;
   font-size: 2em;
   font-weight:900;
@@ -87,3 +118,9 @@ body{
   width: 300px;
   height: 300px;
 } */
+
+#namePlayer-list{
+  font-size: 1.5em;
+  list-style-type: none;
+  font-weight: 900;
+}

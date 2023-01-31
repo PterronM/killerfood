@@ -7,9 +7,9 @@ const pauseBtnDOM = document.querySelector("#img-pause");
 let count = document.querySelector("#puntuacion span");
 const btnReset = document.querySelector("#restart-btn");
 const gameOverScreen = document.querySelector("#gameover-screen");
-const addName = document.querySelector("#name-input");
+// const addName = document.querySelector("#name-input");
 const ulListNamePlayer = document.querySelector("#namePlayer-list")
-const btnAddName = document.querySelector("#btn-add")
+// const btnAddName = document.querySelector("#btn-add")
 let playerName =" ";
 // const imgJoker = document.querySelector("#joker");
 let game;
@@ -25,6 +25,7 @@ const addNamePlayer = () => {
   ulListNamePlayer.appendChild(newNameList);
   //limpiar el input
   addName.value = " ";
+  ulListNamePlayer.innerText = "";
 };
 const startGame = () => {
   // 1.cambiar a canvas del juego
@@ -36,8 +37,6 @@ const startGame = () => {
 
   // 2.crear un objeto de la clase game (crear el juego)
   game = new Game();
-  console.log(game);
-
   // 3.iniciar el juego (game loop)
   game.gameLoop();
 };
@@ -68,4 +67,4 @@ pauseBtnDOM.addEventListener("click",()=>{
     game.gameLoop()
   }
 })
-btnAddName.addEventListener("click",addNamePlayer)
+// btnAddName.addEventListener("click",addNamePlayer)
