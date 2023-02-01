@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.background = new Image(); //agregamos imagen de fondo
-    this.background.src = "img/background2.jpg";
+    this.background.src = "./img/background2.jpg";
     
     this.isGameOn = true;
     this.person = new person();
@@ -16,8 +16,15 @@ class Game {
     this.contador = 0;
     this.aparicionTox = 240;
     this.countNivel = 0;
-    this.scoreCheck = 100; //controla que los niveles empiecen a subir cuando pase de 50 puntos
+    this.scoreCheck = 100; //controla que los niveles empiecen a subir cuando pase de 100 puntos
     this.speedToxInic = 2; //valor inicial de la velocidad de los toxicos
+
+    this.audioJoker = new Audio ();
+    this.audioJoker.src = "../audio/ringtones-joker.mp3"
+    this.audioJoker.volume = 0.2;
+
+    this.audioComida = new Audio();
+    this.audioComida.src = "../audio/apple.mp3"
   }
 
   updateNameScore = () => {
@@ -45,11 +52,11 @@ class Game {
   };
   subirNivel = () => {
     if (this.contador >= this.scoreCheck) {
-      this.scoreCheck += 100 // 1
+      this.scoreCheck += 100 
       this.nextL.x = 20;
       setTimeout(()=>{
         this.nextL.x = -500;
-        this.aparicionTox -= 30;
+        this.aparicionTox -= 20;
         this.speedToxInic += 0.3;
         this.toxicoArr.forEach((eachTox)=>{
           eachTox.aumentarSpeed(0.3); //velocidad inicial en 2 + 0.3 de speedToxInic = 2.03 si le paso speedTocIni seria un total de 4,06
@@ -60,22 +67,31 @@ class Game {
   };
   gameOver = () => {
     this.isGameOn = false;
+    
+    this.audioJoker.play().then(()=>{
+      return true;
+    });
+    this.audioJoker.loop =true;
+
     canvas.style.display = "none";
-    // imgJoker.style.display ="none";
     startScreenGame.style.display = "none";
     gameOverScreen.style.display = "flex";
     this.updateNameScore();
+    audio.pause().then (()=>{
+      return true;
+    });
+    audio.loop = false;
   };
   comidaAparece = () => {
     let randomPosXPlatano = Math.floor(Math.random() * (canvas.width - 45));
     let randomPosXManzana = Math.random() * (canvas.width - 45);
 
-    if (this.frame % 120 === 0) {
+    if (this.frame % 160 === 0) {
       let food1 = new comida(randomPosXPlatano, true);
       this.comidaArr.push(food1);
     }
 
-    if (this.frame % 160 === 0) {
+    if (this.frame % 190 === 0) {
       let food2 = new comida(randomPosXManzana, false);
       this.comidaArr.push(food2);
     }
@@ -122,6 +138,12 @@ class Game {
         this.contador += eachComida.valor;
         this.comidaArr.splice(index, 1);
         count.innerText = this.contador;
+        setTimeout (()=>{
+          this.audioComida.play().then(()=>{
+            return true;
+          });
+          this.audioComida.loop=true;
+        },200)
       }
     });
   };
@@ -129,9 +151,9 @@ class Game {
     this.toxicoArr.forEach((eachTox) => {
       if (
         eachTox.x < this.person.x + this.person.w &&
-        eachTox.x + eachTox.w > this.person.x &&
+        eachTox.x + eachTox.w > this.person.x+20 &&
         eachTox.y < this.person.y + this.person.h &&
-        eachTox.h + eachTox.y > this.person.y
+        eachTox.h + eachTox.y > this.person.y+20
       ) {
         this.isGameOn = false;
         setTimeout(() => {
@@ -158,7 +180,7 @@ class Game {
   drawBackground = () => {
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
   };
-  
+
   clearCanvas = () => {
     ctx.clearRect(0, 0, canvas.Width, canvas.height);
   };

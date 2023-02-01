@@ -17,9 +17,9 @@ class person {
   // METODOS
   drawPerson = (frame) => {
     if(frame % 40 === 0){
-      this.image.src ="../img/personaje.png"
+      this.image.src ="./img/personaje.png"
     }else if(frame % 20 === 0){
-      this.image.src = "../img/personaje-rotado.png"
+      this.image.src = "./img/personaje-rotado.png"
     }
     ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
 

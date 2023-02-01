@@ -7,7 +7,7 @@ class pocima {
       this.valor = 20;
       this.speed = 3;
       this.image = new Image();
-      this.image.src ="../img/X2.png"
+      this.image.src ="./img/X2.png"
     }
   
     // metodos

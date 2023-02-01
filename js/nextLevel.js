@@ -5,7 +5,7 @@ class nextLevel {
     this.w = 450;
     this.h = 450;
     this.image = new Image();
-    this.image.src = "../img/mancha.png";
+    this.image.src = "./img/mancha.png";
   }
 
   // metodos

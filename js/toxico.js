@@ -6,7 +6,7 @@ class toxico {
     this.h = 70;
     this.speed = velToxInicial;
     this.image = new Image();
-    this.image.src = "../img/muerte.png";
+    this.image.src = "./img/muerte.png";
   }
 
   // metodos
