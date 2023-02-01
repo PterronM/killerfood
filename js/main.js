@@ -11,7 +11,7 @@ const ulListNamePlayer = document.querySelector("#namePlayer-list")
 let playerName =" ";
 let game;
 let audio = new Audio();
-audio.src = "../audio/stranger-things-124008.mp3";
+audio.src = "./audio/stranger-things-124008.mp3";
 audio.volume = 0.05;
 // const addName = document.querySelector("#name-input");
 // const btnAddName = document.querySelector("#btn-add")

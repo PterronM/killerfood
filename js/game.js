@@ -20,11 +20,12 @@ class Game {
     this.speedToxInic = 2; //valor inicial de la velocidad de los toxicos
 
     this.audioJoker = new Audio ();
-    this.audioJoker.src = "../audio/ringtones-joker.mp3"
+    this.audioJoker.src = "./audio/ringtones-joker.mp3"
     this.audioJoker.volume = 0.05;
 
     this.audioComida = new Audio();
-    this.audioComida.src = "../audio/apple.mp3"
+    this.audioComida.src = "./audio/apple.mp3"
+    this.audioComida.volume = 0.05;
   }
 
   updateNameScore = () => {
@@ -138,12 +139,9 @@ class Game {
         this.contador += eachComida.valor;
         this.comidaArr.splice(index, 1);
         count.innerText = this.contador;
-        setTimeout (()=>{
-          this.audioComida.play().then(()=>{
+        this.audioComida.play().then(()=>{
             return true;
-          });
-          this.audioComida.loop=true;
-        },200)
+          });      
       }
     });
   };
