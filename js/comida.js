@@ -1,7 +1,7 @@
 class comida {
     constructor(posX, whatFood){
         this.x = posX;
-        this.y = -10;
+        this.y = -30;
         this.w = 50;
         this.h = 55;
         this.speed = 2;

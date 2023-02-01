@@ -1,7 +1,7 @@
 class pocima {
     constructor(posX) {
       this.x = posX;
-      this.y = -10;
+      this.y = -30;
       this.w = 50;
       this.h = 70;
       this.valor = 20;

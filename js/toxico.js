@@ -1,9 +1,9 @@
 class toxico {
   constructor(posX, velToxInicial) {
     this.x = posX;
-    this.y = -10;
+    this.y = -30;
     this.w = 50;
-    this.h = 70;
+    this.h = 80;
     this.speed = velToxInicial;
     this.image = new Image();
     this.image.src = "./img/muerte.png";

@@ -7,37 +7,36 @@ const pauseBtnDOM = document.querySelector("#img-pause");
 let count = document.querySelector("#puntuacion span");
 const btnReset = document.querySelector("#restart-btn");
 const gameOverScreen = document.querySelector("#gameover-screen");
-const ulListNamePlayer = document.querySelector("#namePlayer-list")
-let playerName =" ";
+const ulListNamePlayer = document.querySelector("#namePlayer-list");
+let playerName = " ";
 let game;
 let audio = new Audio();
 audio.src = "./audio/stranger-things-124008.mp3";
 audio.volume = 0.05;
 // const addName = document.querySelector("#name-input");
 // const btnAddName = document.querySelector("#btn-add")
-// const imgJoker = document.querySelector("#joker");
 
 
-const addNamePlayer = () => {
-  playerName = addName.value;
-  //crear un nuevo elemento en la lista
-  let newNameList = document.createElement("li");
-  //crear el innerText del nuevo elemento li
-  // newNameList.innerText = "Welcome " + playerName + "! Are you ready??";
-  //agregar el elemento li a la ul que ya tenemos
-  ulListNamePlayer.appendChild(newNameList);
-  //limpiar el input
-  addName.value = " ";
-  ulListNamePlayer.innerText = "";
-};
+// const addNamePlayer = () => {
+//   playerName = addName.value;
+//   //crear un nuevo elemento en la lista
+//   let newNameList = document.createElement("li");
+//   //crear el innerText del nuevo elemento li
+//   // newNameList.innerText = "Welcome " + playerName + "! Are you ready??";
+//   //agregar el elemento li a la ul que ya tenemos
+//   ulListNamePlayer.appendChild(newNameList);
+//   //limpiar el input
+//   addName.value = " ";
+//   ulListNamePlayer.innerText = "";
+// };
 
 const startGame = () => {
-   audio.play().then(()=>{
+  audio.play().then(() => {
     return true;
   });
   audio.loop = true;
   // 1.cambiar a canvas del juego
-
+  
   startScreenDom.style.display = "none";
   canvas.style.display = "flex";
   startScreenGame.style.display = "flex";
@@ -45,27 +44,38 @@ const startGame = () => {
 
   // 2.crear un objeto de la clase game (crear el juego)
   game = new Game();
-  
+
   // 3.iniciar el juego (game loop)
   game.gameLoop();
-
 };
+
 const resetGame = () => {
   startScreenDom.style.display = "flex";
   startScreenGame.style.display = "none";
   gameOverScreen.style.display = "none";
   count.innerText = 0;
-  game.audioJoker.pause().then (()=>{
+  game.audioJoker.pause().then(() => {
     return true;
-  })
+  });
   audio.loop = false;
 };
+
 const movePerson = (event) => {
   if (event.code === "ArrowLeft") {
     game.person.moveLeft();
-
   } else if (event.code === "ArrowRight") {
     game.person.moveRight();
+  }
+};
+
+const pauseP = () => {
+  if (game.isGameOn === true) {
+    game.isGameOn = false;
+    audio.pause();
+  } else {
+    game.isGameOn = true;
+    game.gameLoop();
+    audio.play();
   }
 };
 
@@ -73,16 +83,10 @@ const movePerson = (event) => {
 startBtnDom.addEventListener("click", startGame);
 window.addEventListener("keydown", movePerson);
 btnReset.addEventListener("click", resetGame);
-pauseBtnDOM.addEventListener("click",()=>{
-  if(game.isGameOn === true){
-    game.isGameOn = false
-    audio.pause();
-    game.audioComida.pause();
-  }else{
-    game.isGameOn = true
-    game.gameLoop()
-    audio.play();
-    game.audioComida.play();
+pauseBtnDOM.addEventListener("click", pauseP);
+window.addEventListener("keydown", (event) => {
+  if (event.code === "KeyP") {
+    pauseP();
   }
-})
+});
 // btnAddName.addEventListener("click",addNamePlayer)
