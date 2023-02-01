@@ -14,6 +14,7 @@ class Game {
     this.pocimaArr = [];
     this.frame = 300; //propiedad que determina la cantidad de comida que ha pasado por el juego
     this.contador = 0;
+    ;
     this.aparicionTox = 240;
     this.countNivel = 0;
     this.scoreCheck = 100; //controla que los niveles empiecen a subir cuando pase de 100 puntos
@@ -27,6 +28,8 @@ class Game {
     this.audioComida.src = "./audio/apple-ok.mp3";
     this.audioComida.volume = 0.05;
   }
+
+
 
   updateNameScore = () => {
     let newNameList = document.createElement("li");
@@ -61,19 +64,15 @@ class Game {
   gameOver = () => {
     this.isGameOn = false;
 
-    this.audioJoker.play().then(() => {
-      return true;
-    });
-    this.audioJoker.loop = true;
+    this.audioJoker.play()
+
     canvas.style.display = "none";
     startScreenGame.style.display = "none";
     gameOverScreen.style.display = "flex";
+    
     this.updateNameScore();
 
-    audio.pause().then(() => {
-      return true;
-    });
-    audio.loop = false;
+    audio.pause()
 
   };
   comidaAparece = () => {

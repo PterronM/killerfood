@@ -8,11 +8,16 @@ let count = document.querySelector("#puntuacion span");
 const btnReset = document.querySelector("#restart-btn");
 const gameOverScreen = document.querySelector("#gameover-screen");
 const ulListNamePlayer = document.querySelector("#namePlayer-list");
+const bestPlayer = document.querySelector("#best-Player")
 let playerName = " ";
 let game;
 let audio = new Audio();
-audio.src = "./audio/stranger-things-124008.mp3";
+audio.src = "./audio/stranger-things-ok.mp3";
 audio.volume = 0.05;
+
+let puntos = 0
+
+
 // const addName = document.querySelector("#name-input");
 // const btnAddName = document.querySelector("#btn-add")
 
@@ -54,10 +59,7 @@ const resetGame = () => {
   startScreenGame.style.display = "none";
   gameOverScreen.style.display = "none";
   count.innerText = 0;
-  game.audioJoker.pause().then(() => {
-    return true;
-  });
-  audio.loop = false;
+  game.audioJoker.pause()
 };
 
 const movePerson = (event) => {
@@ -68,7 +70,7 @@ const movePerson = (event) => {
   }
 };
 
-const pauseP = () => {
+const pause = () => {
   if (game.isGameOn === true) {
     game.isGameOn = false;
     audio.pause();
@@ -79,14 +81,16 @@ const pauseP = () => {
   }
 };
 
+
+
 //--------------------ADD EVENT LISTENERS--------------------------------
 startBtnDom.addEventListener("click", startGame);
 window.addEventListener("keydown", movePerson);
 btnReset.addEventListener("click", resetGame);
-pauseBtnDOM.addEventListener("click", pauseP);
+pauseBtnDOM.addEventListener("click", pause);
 window.addEventListener("keydown", (event) => {
   if (event.code === "KeyP") {
-    pauseP();
+    pause();
   }
 });
 // btnAddName.addEventListener("click",addNamePlayer)
