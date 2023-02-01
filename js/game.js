@@ -24,7 +24,7 @@ class Game {
     this.audioJoker.volume = 0.05;
 
     this.audioComida = new Audio();
-    this.audioComida.src = "./audio/apple.mp3"
+    this.audioComida.src = "./audio/apple-ok.mp3"
     this.audioComida.volume = 0.05;
   }
 
@@ -46,7 +46,7 @@ class Game {
         "WOW  genial,  " + this.contador + " puntos";
     } else {
       newNameList.innerText =
-        this.contador + " puntos , eres un maquina ";
+        this.contador + " puntos , eres una maquina ";
     }
 
     ulListNamePlayer.appendChild(newNameList);

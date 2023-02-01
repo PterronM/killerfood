@@ -76,9 +76,13 @@ btnReset.addEventListener("click", resetGame);
 pauseBtnDOM.addEventListener("click",()=>{
   if(game.isGameOn === true){
     game.isGameOn = false
+    audio.pause();
+    game.audioComida.pause();
   }else{
     game.isGameOn = true
     game.gameLoop()
+    audio.play();
+    game.audioComida.play();
   }
 })
 // btnAddName.addEventListener("click",addNamePlayer)
