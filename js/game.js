@@ -21,7 +21,7 @@ class Game {
 
     this.audioJoker = new Audio ();
     this.audioJoker.src = "../audio/ringtones-joker.mp3"
-    this.audioJoker.volume = 0.2;
+    this.audioJoker.volume = 0.05;
 
     this.audioComida = new Audio();
     this.audioComida.src = "../audio/apple.mp3"
