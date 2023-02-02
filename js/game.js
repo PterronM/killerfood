@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.background = new Image(); //agregamos imagen de fondo
-    this.background.src = "./img/background2.jpg";
+    this.background.src = "../img/600x700.jpg";
 
     this.isGameOn = true;
     this.person = new person();
@@ -13,7 +13,7 @@ class Game {
     this.toxicoArr = [];
     this.pocimaArr = [];
     this.pocimaSpeedArr = [];
-    this.frame = 300; //propiedad que determina la cantidad de comida que ha pasado por el juego
+    this.frame = 1; //propiedad que determina la cantidad de comida que ha pasado por el juego
     this.contador = 0;
     this.aparicionTox = 240;
     this.aparicionPocSpeed = 260;
@@ -50,7 +50,7 @@ class Game {
   subirNivel = () => {
     if (this.contador >= this.scoreCheck) {
       this.scoreCheck += 100;
-      this.nextL.x = 20;
+      this.nextL.x = 30;
       setTimeout(() => {
         this.nextL.x = -500;
         this.aparicionPocSpeed -= 15;
@@ -59,7 +59,7 @@ class Game {
         this.toxicoArr.forEach((eachTox) => {
           eachTox.aumentarSpeed(0.3); //velocidad inicial en 2 + 0.3 de speedToxInic = 2.03 si le paso speedTocIni seria un total de 4,06
         });
-      }, 800);
+      }, 1000);
     }
   };
 
@@ -197,22 +197,23 @@ class Game {
   };
   colisionPocimaSpeedPerson = () => {
     this.pocimaSpeedArr.forEach((eachPocimaSpeed) => {
-      // console.log(eachTox)
+      
       if (
         eachPocimaSpeed.x < this.person.x + (this.person.w - 10) &&
         eachPocimaSpeed.x + eachPocimaSpeed.w > this.person.x + 10 &&
         eachPocimaSpeed.y < this.person.y + this.person.h &&
         eachPocimaSpeed.h + eachPocimaSpeed.y > this.person.y + 10
       ) {
-        this.person.speed -= this.speedDown; //disminuyo su velocidad
-        let counter = 0;
-        let idInterval = setInterval(() => {
-          counter++;
+         //disminuyo su velocidad
+         this.person.speed -= this.speedDown;
+         if(this.person.speed <=10){
+           this.person.speed = 10
+         }
+        
+        setTimeout(() => {
           this.person.speed = 50; // a los 2 segundos vuelve a su velocidad normal
-          if (counter === 1) {
-            clearInterval(idInterval);
-          }
         }, 2000);
+
         this.pocimaSpeedArr.splice(eachPocimaSpeed, 1);
       }
     });
@@ -255,6 +256,7 @@ class Game {
     this.pocimaSpeedArr.forEach((eachPocimaSpeed) => {
       eachPocimaSpeed.movePocimaSpeed();
     });
+
     this.subirNivel();
 
     // 3.dibujar los elementos

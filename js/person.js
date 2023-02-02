@@ -1,6 +1,6 @@
 class person {
   constructor() {
-    this.x = 200;
+    this.x = 255;
     this.y = canvas.height - 160;
     this.w = 90;
     this.h = 160;
@@ -19,12 +19,12 @@ class person {
   };
 
   moveLeft = () => {
-    if (this.x > 0) {
+    if (this.x  > 0 ) {
       this.x -= this.speed;
     }
   };
   moveRight = () => {
-    if (this.x + this.w <= canvas.width) {
+    if (this.x + this.w < canvas.width) {
       this.x += this.speed;
     }
   };
