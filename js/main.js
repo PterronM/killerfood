@@ -4,12 +4,14 @@ const startBtnDom = document.querySelector("#start-game");
 const startScreenDom = document.querySelector("#start-screen");
 const startScreenGame = document.querySelector("#container-game");
 const pauseBtnDOM = document.querySelector("#img-pause");
+const muteBtnDom = document.querySelector("#img-mute")
 let count = document.querySelector("#puntuacion span");
 const btnReset = document.querySelector("#restart-btn");
 const gameOverScreen = document.querySelector("#gameover-screen");
 const mensajeScoreGameOver = document.querySelector("#namePlayer-list");
 const recordDom = document.querySelector("#record span")
 // let playerName = " ";
+let audioMute = true;
 let game;
 let audio = new Audio();
 audio.src = "./audio/stranger-things-ok.mp3";
@@ -81,6 +83,21 @@ const pause = () => {
   }
 };
 
+
+const mute = ()=>{
+if(audioMute === true){
+  audio.pause()
+  game.audioComida.pause()
+  audioMute = false;
+}else{
+  audio.play()
+  game.audioComida.play()
+  audioMute = true;
+}
+}
+
+
+
 if(localStorage.getItem("puntuacionMax") === undefined){
   localStorage.setItem("puntuacionMax",0);
 }
@@ -98,4 +115,6 @@ window.addEventListener("keydown", (event) => {
     pause();
   }
 });
+muteBtnDom.addEventListener("click",mute);
+
 

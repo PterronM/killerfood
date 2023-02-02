@@ -17,7 +17,7 @@ class Game {
     this.contador = 0;
     this.aparicionTox = 240;
     this.aparicionPocSpeed = 260;
-    this.speedDown = 30;
+    this.speedDown = 20;
     // this.countNivel = 0;
     this.scoreCheck = 100; //controla que los niveles empiecen a subir cuando pase de 100 puntos
     this.speedToxInic = 2; //valor inicial de la velocidad de los toxicos
@@ -196,7 +196,7 @@ class Game {
     });
   };
   colisionPocimaSpeedPerson = () => {
-    this.pocimaSpeedArr.forEach((eachPocimaSpeed) => {
+    this.pocimaSpeedArr.forEach((eachPocimaSpeed,index) => {
       
       if (
         eachPocimaSpeed.x < this.person.x + (this.person.w - 10) &&
@@ -211,10 +211,10 @@ class Game {
          }
         
         setTimeout(() => {
-          this.person.speed = 50; // a los 2 segundos vuelve a su velocidad normal
+          this.person.speed = 40; // a los 2 segundos vuelve a su velocidad normal
         }, 2000);
 
-        this.pocimaSpeedArr.splice(eachPocimaSpeed, 1);
+        this.pocimaSpeedArr.splice(index, 1);
       }
     });
   };
