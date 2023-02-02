@@ -4,6 +4,10 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
 }
+button:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
 
 #container-principal {
     display: flex;
@@ -85,7 +89,7 @@ body{
     align-items: center;
     height: 100vh;
     background-color:#B944B1;
-    gap: 2.5em;
+    gap: 1.5em;
 }
 #my-canvas{
     display: none;
@@ -112,15 +116,26 @@ body{
   font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
-/* #joker{
-  display: none;
-  justify-content: center;
-  width: 300px;
-  height: 300px;
-} */
 
-#namePlayer-list{
+.update-container{
+  display: flex;
+  flex-direction: column;
   font-size: 1.5em;
   list-style-type: none;
   font-weight: 900;
+  text-align: center;
+  color:#7c1919;
+  margin: 0px;
+  padding: 0px;
+  
+}
+#record{
+  background-color: #44b94cb0;
+  margin: 0;
+  padding: 0;
+}
+.update-container ul{
+  list-style-type: none;
+  text-align: center;
+  padding: 0px;
 }

@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food Killer</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    
-<div id="container-principal">
-    <!-- PANTALLA PRINCIPAL -->
-    <div id="start-screen" class="container-principal">
-        <img src="./img/killerFood.png" alt="Killer Food" width="800">
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="container-principal">
+      <!-- PANTALLA PRINCIPAL -->
+      <div id="start-screen" class="container-principal">
+        <img src="./img/killerFood.png" alt="Killer Food" width="800" />
         <!-- <div id="add-name">
             <input id="name-input" type="text" placeholder="Tu Nombre" />
             <button id="btn-add">Añadir</button>
         </div> -->
         <button id="start-game">Comenzar</button>
-    </div>
-    
-    <!-- START GAME -->
-    
-    <div id="container-canvas">
+      </div>
+
+      <!-- START GAME -->
+
+      <div id="container-canvas">
         <!-- <img id="joker" src="./img/joker.png" alt="Joker"> -->
-        <div >
-            <canvas id="my-canvas" width="500" height="700"></canvas>
+        <div>
+          <canvas id="my-canvas" width="500" height="700"></canvas>
         </div>
-        
+
         <div id="container-game">
-            <p id="puntuacion">Puntuacion : <span>&nbsp 0 </span></p>
-            <img id="img-pause" src="./img/btn-pausa.png" alt="Pausa" width="40">
+          <p id="puntuacion">Puntuacion : <span>&nbsp 0 </span></p>
+          <img
+            id="img-pause"
+            src="./img/btn-pausa.png"
+            alt="Pausa"
+            width="40"
+          />
         </div>
-    </div>
-       
-    
-    <!-- GAME OVER -->
-    <div id="gameover-screen">
+      </div>
+
+      <!-- GAME OVER -->
+      <div id="gameover-screen">
         <div class="update-container">
-            <p id="best-Player"></p>
-            <ul id="namePlayer-list"></ul>
+          <p id="record"><span>0</span></p>
+          <p id="namePlayer-list"></p>
         </div>
-        <img src="./img/game-over.png" alt="Game Over">
+        <img src="./img/game-over.png" alt="Game Over" />
         <button id="restart-btn">Intentalo de nuevo Amigo</button>
+      </div>
+
+      <script src="./js/main.js"></script>
+      <script src="./js/game.js"></script>
+      <script src="./js/comida.js"></script>
+      <script src="./js/toxico.js"></script>
+      <script src="./js/person.js"></script>
+      <script src="./js/pocima.js"></script>
+      <script src="./js/pocimaSpeed.js"></script>
+      <script src="./js/nextLevel.js"></script>
     </div>
-
-    <script src="./js/main.js"></script>
-    <script src="./js/game.js"></script>
-    <script src="./js/comida.js"></script>
-    <script src="./js/toxico.js"></script>
-    <script src="./js/person.js"></script>
-    <script src="./js/pocima.js"></script>
-    <script src="./js/nextLevel.js"></script>
-
-</div>
-
-
-
-</body>
+  </body>
 </html>

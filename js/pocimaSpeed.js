@@ -1,21 +1,20 @@
-class pocima {
+class pocimaSpeed {
     constructor(posX) {
       this.x = posX;
       this.y = -30;
       this.w = 50;
       this.h = 70;
-      this.valor = 20;
-      this.speed = 3;
+      this.speed = 4;
       this.image = new Image();
-      this.image.src ="./img/X2.png"
+      this.image.src ="../img/speed.png"
     }
   
     // metodos
-    drawPocima = () => {
+    drawPocimaSpeed = () => {
       ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
     };
   
-    movePocima = () => {
+    movePocimaSpeed = () => {
       this.y += this.speed;
     };
        

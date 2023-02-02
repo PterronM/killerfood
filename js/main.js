@@ -7,9 +7,9 @@ const pauseBtnDOM = document.querySelector("#img-pause");
 let count = document.querySelector("#puntuacion span");
 const btnReset = document.querySelector("#restart-btn");
 const gameOverScreen = document.querySelector("#gameover-screen");
-const ulListNamePlayer = document.querySelector("#namePlayer-list");
-const bestPlayer = document.querySelector("#best-Player")
-let playerName = " ";
+const mensajeScoreGameOver = document.querySelector("#namePlayer-list");
+const recordDom = document.querySelector("#record span")
+// let playerName = " ";
 let game;
 let audio = new Audio();
 audio.src = "./audio/stranger-things-ok.mp3";
@@ -29,10 +29,10 @@ let puntos = 0
 //   //crear el innerText del nuevo elemento li
 //   // newNameList.innerText = "Welcome " + playerName + "! Are you ready??";
 //   //agregar el elemento li a la ul que ya tenemos
-//   ulListNamePlayer.appendChild(newNameList);
+//   ListNamePlayer.appendChild(newNameList);
 //   //limpiar el input
 //   addName.value = " ";
-//   ulListNamePlayer.innerText = "";
+//   ListNamePlayer.innerText = "";
 // };
 
 const startGame = () => {
@@ -45,7 +45,7 @@ const startGame = () => {
   startScreenDom.style.display = "none";
   canvas.style.display = "flex";
   startScreenGame.style.display = "flex";
-  ulListNamePlayer.innerText = "";
+  mensajeScoreGameOver.innerText = "";
 
   // 2.crear un objeto de la clase game (crear el juego)
   game = new Game();
@@ -81,6 +81,11 @@ const pause = () => {
   }
 };
 
+if(localStorage.getItem("puntuacionMax") === undefined){
+  localStorage.setItem("puntuacionMax",0);
+}
+
+
 
 
 //--------------------ADD EVENT LISTENERS--------------------------------
@@ -93,4 +98,4 @@ window.addEventListener("keydown", (event) => {
     pause();
   }
 });
-// btnAddName.addEventListener("click",addNamePlayer)
+
