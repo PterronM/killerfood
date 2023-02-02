@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.background = new Image(); //agregamos imagen de fondo
-    this.background.src = "../img/600x700.jpg";
+    this.background.src = "./img/600x700.jpg";
 
     this.isGameOn = true;
     this.person = new person();
