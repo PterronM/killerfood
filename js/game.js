@@ -53,7 +53,7 @@ class Game {
       this.nextL.x = 20;
       setTimeout(() => {
         this.nextL.x = -500;
-        this.aparicionPocSpeed -=15;
+        this.aparicionPocSpeed -= 15;
         this.aparicionTox -= 20;
         this.speedToxInic += 0.3;
         this.toxicoArr.forEach((eachTox) => {
@@ -143,7 +143,8 @@ class Game {
   };
   quitarPocimaSpeed = () => {
     if (
-      this.pocimaSpeedArr.length !== 0 && this.pocimaSpeedArr[0].y > canvas.height) {
+      this.pocimaSpeedArr.length !== 0 &&
+      this.pocimaSpeedArr[0].y > canvas.height) {
       this.pocimaSpeedArr.shift();
     }
   };
@@ -203,17 +204,16 @@ class Game {
         eachPocimaSpeed.y < this.person.y + this.person.h &&
         eachPocimaSpeed.h + eachPocimaSpeed.y > this.person.y + 10
       ) {
-        this.person.speed -= this.speedDown;
+        this.person.speed -= this.speedDown; //disminuyo su velocidad
         let counter = 0;
-        let idInterval = setInterval(()=>{
-          counter++
-          this.person.speed = 50;
-          if(counter === 1){
+        let idInterval = setInterval(() => {
+          counter++;
+          this.person.speed = 50; // a los 2 segundos vuelve a su velocidad normal
+          if (counter === 1) {
             clearInterval(idInterval);
           }
-        },2000)
+        }, 2000);
         this.pocimaSpeedArr.splice(eachPocimaSpeed, 1);
-        
       }
     });
   };
