@@ -159,9 +159,7 @@ class Game {
         this.contador += eachComida.valor;
         this.comidaArr.splice(index, 1);
         count.innerText = this.contador;
-        this.audioComida.play().then(() => {
-          return true;
-        });
+        this.audioComida.play()
       }
     });
   };
