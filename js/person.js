@@ -4,7 +4,7 @@ class person {
     this.y = canvas.height - 160;
     this.w = 90;
     this.h = 160;
-    this.speed = 36;
+    this.speed = 50;
     this.image = new Image();
   }
 
@@ -19,13 +19,19 @@ class person {
   };
 
   moveLeft = () => {
-    if (this.x  > 3) {
+    if (this.x  > 0) {
       this.x -= this.speed;
     }
+    if(this.x - this.speed < 0){
+      this.x = 0
+     }
   };
   moveRight = () => {
     if (this.x + this.w < canvas.width) {
       this.x += this.speed;
     }
+    // if((this.x + this.w) + this.speed > canvas.width){
+    //   this.x -= this.speed
+    // }
   };
 }

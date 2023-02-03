@@ -206,7 +206,7 @@ class Game {
          this.person.speed -= this.speedDown;
          if(this.person.speed <=10){
            this.person.speed = 10
-         }
+         }        
         
         setTimeout(() => {
           this.person.speed = 40; // a los 2 segundos vuelve a su velocidad normal
