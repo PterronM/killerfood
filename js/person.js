@@ -30,8 +30,6 @@ class person {
     if (this.x + this.w < canvas.width) {
       this.x += this.speed;
     }
-    // if((this.x + this.w) + this.speed > canvas.width){
-    //   this.x -= this.speed
-    // }
+   
   };
 }
